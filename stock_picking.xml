@@ -1,0 +1,47 @@
+
+<openerp>
+<data>
+
+<record id="bs_view_picking_form" model="ir.ui.view">
+    <field name="name">bs.stock.picking.form</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form"/>
+    <field name="arch" type="xml">
+      <!--<button string="Create Invoice/Refund" position="attributes">
+       <attribute name="attrs">{'invisible': ['|',('invoice_state','=','invoiced'),('invoice_state','=','none')]}</attribute>
+      </button>-->
+      <field name="partner_id" position="before">
+        <field name="bs_releasable" />
+      </field>
+    </field>
+</record>
+
+<record id="novak_custom_out_tree" model="ir.ui.view">
+    <field name="name">bs.stock.picking.out.tree</field>
+    <field name="model">stock.picking.out</field>
+    <field name="inherit_id" ref="stock.view_picking_out_tree"/>
+	<field name="type">tree</field>
+    <field name="arch" type="xml">
+		<xpath expr="/tree/field[@name='name']" position="before">
+            <field name="bs_releasable"/>
+        </xpath>
+    </field>
+</record>
+
+<!--<record id="bs_view_picking_out_search" model="ir.ui.view">
+    <field name="name">bs.stock.picking.out.search</field>
+    <field name="model">stock.picking.out</field>
+    <field name="inherit_id" ref="stock.view_picking_out_search"/>
+    <field name="arch" type="xml">
+        <filter string="Back Orders" position="before">
+            <filter string="FedEx" domain="[('carrier_id','ilike','FedEx')]" />
+            <filter string="UPS" domain="[('carrier_id','ilike','UPS')]" />
+            <filter string="Will Call" domain="[('carrier_id','ilike','Will Call')]" />
+            <separator/>
+        </filter>
+    </field>
+</record>-->
+
+</data>
+</openerp>
+

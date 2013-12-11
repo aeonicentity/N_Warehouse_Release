@@ -1,0 +1,18 @@
+
+<openerp>
+<data>
+
+<record id="bs_invoice_form" model="ir.ui.view">
+    <field name="name">custom.account.invoice.form</field>
+    <field name="model">account.invoice</field>
+    <field name="inherit_id" ref="account.invoice_form"/>
+    <field name="arch" type="xml">
+                    <field name="partner_id" position="before">
+                        <field name="bs_releasable" string="Release Delivery Order" attrs="{'invisible':[('payment_term','!=',False)]}"/>
+                    </field>
+    </field>
+</record>
+
+</data>
+</openerp>
+

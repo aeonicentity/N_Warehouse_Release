@@ -1,0 +1,42 @@
+
+<openerp>
+<data>
+
+<record id="bs_view_order_withcarrier_form" model="ir.ui.view">
+    <field name="name">bs.delivery.sale.order_withcarrier.form.view</field>
+    <field name="model">sale.order</field>
+    <field name="sequence">17</field>
+    <field name="inherit_id" ref="delivery.view_order_withcarrier_form"/>
+    <field name="arch" type="xml">
+                    <button name="delivery_set" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </button>
+                    <label string="If you don't 'Add in Quote', the exact price will be computed when invoicing based on delivery order(s)." position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </label>
+                   <field name="payment_term" position="replace">
+                    </field>
+                    <xpath expr="//group[@name='sale_total']" position="after">
+                      <group style="width: 40%%">
+                        <field name="payment_term" widget="selection" on_change="onchange_payment_term(payment_term, context)"/>
+                       <field name="payment_type" widget="selection"/> 
+                      </group>                 
+                    <field name="bs_releasable" />
+                    </xpath>
+    </field>
+</record>
+
+<record id="bs_view_order_form_inherit" model="ir.ui.view">
+    <field name="name">bs.sale.order.form.sale.stock</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale_stock.view_order_form_inherit"/>
+    <field name="arch" type="xml">
+                    <button name="action_view_delivery" position="attributes">
+                        <attribute name="attrs">{'invisible': ['|','|',('picking_ids','=',False),('picking_ids','=',[]), ('state', 'not in', ('progress','manual','done'))]}</attribute>
+                    </button>
+    </field>
+</record>
+
+</data>
+</openerp>
+
